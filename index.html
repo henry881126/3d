@@ -1,0 +1,150 @@
+﻿<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <link rel="stylesheet" href="./index.css">
+</head>
+
+<body>
+  <h3>
+    <!-- <div class="title"></div> -->
+    <span>中国（南康）家居云上小镇 · 区块链溯源平台</span>
+    <img src="./images/logo7.jpg" alt="">
+  </h3>
+
+  <div id="nav">
+    <div>
+      <img data-index="1" class="select" src="./images/logo_bg.png" alt="">
+      <img data-index="1" src="./images/logo_1.png" alt="">
+    </div>
+    <div>
+      <img data-index="2" class="" src="./images/logo_bg.png" alt="">
+      <img data-index="2" src="./images/logo_2.png" alt="">
+    </div>
+    <div>
+      <img data-index="3" class="" src="./images/logo_bg.png" alt="">
+      <img data-index="3" src="./images/logo_3.png" alt="">
+    </div>
+    <div>
+      <img data-index="4" class="" src="./images/logo_bg.png" alt="">
+      <img data-index="4" src="./images/logo_4.png" alt="">
+    </div>
+    <div>
+      <img data-index="5" class="" src="./images/logo_bg.png" alt="">
+      <img data-index="5" src="./images/logo_5.png" alt="">
+    </div>
+    <div>
+      <img data-index="6" class="" src="./images/logo_bg.png" alt="">
+      <img data-index="6" src="./images/logo_6.png" alt="">
+    </div>
+
+  </div>
+  <div class="search">
+    <input type="text">
+    <img src="./images/search.png" alt="">
+  </div>
+  <div id="box" class="boxRound">
+    <div class="front"><img src="./images/ad1.png" alt=""></div>
+    <div class="back"><img src="./images/ad1.png" alt=""></div>
+    <div class="top"><img src="./images/ad1_code.png" alt=""></div>
+    <div class="bottom"><img src="./images/ad1_code.png" alt=""></div>
+    <div class="left"><span>飞鑫家具家具有限公司</span></div>
+    <div class="right"><span>飞鑫家具家具有限公司</span></div>
+    <div class="front1"></div>
+    <div class="back1"></div>
+    <div class="top1"></div>
+    <div class="bottom1"></div>
+    <div class="left1"></div>
+    <div class="right1"></div>
+    <div class="front2"></div>
+    <div class="back2"></div>
+    <div class="top2"></div>
+    <div class="bottom2"></div>
+    <div class="left2"></div>
+    <div class="right2"></div>
+  </div>
+
+  <div class="footer">
+
+  </div>
+
+  <video src="./images/bg.mp4" id="bgvid" autoplay="autoplay" loop="loop" muted="muted"></video>
+</body>
+<script>
+  function bodyScale() {
+    var devicewidth = document.documentElement.clientWidth;
+    var scale = devicewidth / 1500;
+    document.body.style.zoom = scale;
+  }
+  window.onload = function () {
+    bodyScale();
+
+    var searchImg = document.querySelector('.search img')
+    searchImg.addEventListener('click', function () {
+      alert('没有找到符合条件的记录')
+    })
+    var oBox = document.querySelector('#box');
+    var y = -60;
+    var x = 45;
+    oBox.addEventListener('mouseover', function (ev) {
+      oBox.className = ''
+    })
+    oBox.addEventListener('mouseleave', function (ev) {
+      oBox.className = 'boxRound'
+    })
+    oBox.onmousedown = function (ev) {
+      var oEvent = ev || event;
+      var disX = oEvent.clientX - y;
+      var disY = oEvent.clientY - x;
+      document.onmousemove = function (ev) {
+        var oEvent = ev || event;
+        x = oEvent.clientY - disY;
+        y = oEvent.clientX - disX;
+        oBox.style.transform = 'perspective(800px) rotateX(' + -x + 'deg) rotateY(' + y + 'deg)';
+      };
+      document.onmouseup = function () {
+        document.onmousemove = null;
+        document.onmouseup = null;
+      };
+      return false;
+    };
+    var nav = document.querySelector('#nav');
+    var names = [
+      '飞鑫家具家具有限公司',
+      '锋为家具家具有限公司',
+      '家有儿女家具有限公司',
+      '金海家具家具有限公司',
+      '康名箭家具有限公司',
+      '木棉花家具有限公司']
+    nav.addEventListener('click', function (event) {
+      var imgs = document.querySelectorAll('#nav img')
+      imgs.forEach((item, index) => {
+        item.className = ''
+      })
+
+      event.target.className = 'select'
+
+      var index = event.target.dataset.index
+      if (!index) {
+        return
+      }
+
+      var spans = document.querySelectorAll('#box span')
+      spans[0].innerText = names[index - 1]
+      spans[1].innerText = names[index - 1]
+      var front = document.querySelector('.front img')
+      var back = document.querySelector('.back img')
+      front.src = './images/ad' + index + '.png'
+      back.src = './images/ad' + index + '.png'
+      var top = document.querySelector('.top img')
+      var bottom = document.querySelector('.bottom img')
+      top.src = './images/ad' + index + '_code.png'
+      bottom.src = './images/ad' + index + '_code.png'
+
+    })
+  };
+</script>
+
+</html>
